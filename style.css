@@ -1,0 +1,30 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  padding: 24px;
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ui-bar {
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: center;
+  column-gap: 16px;
+}
+
+input,
+button {
+  padding: 4px 12px;
+  font-family: inherit;
+}
+
+img {
+  max-width: 90vw;
+}
