@@ -6,25 +6,22 @@ const image = document.querySelector('img')
 
 let searchCache = ''
 
-function setGif(keyword) {
-  return fetch(
-    `https://api.giphy.com/v1/gifs/translate?api_key=oJkxMWdW3cFMOjsng83A2nKcEwFNnKaI&s=${keyword}&weirdness=10`,
-    { mode: 'cors' }
-  )
-    .then(function (response) {
-      return response.json()
-    })
-    .then(function (response) {
-      const url = response.data.images?.original.url
-      if (url) {
-        image.src = url
-      } else {
-        alert('No GIF found. Please try another keyword.')
-      }
-    })
-    .catch(function () {
-      alert('Something went wrong. Please try again later.')
-    })
+async function setGif(keyword) {
+  try {
+    const response = await fetch(
+      `https://api.giphy.com/v1/gifs/translate?api_key=oJkxMWdW3cFMOjsng83A2nKcEwFNnKaI&s=${keyword}&weirdness=10`,
+      { mode: 'cors' }
+    )
+    const json = await response.json()
+    const imageUrl = await json.data.images?.original.url
+    if (!imageUrl) {
+      alert('No GIF found. Please try another keyword.')
+    } else {
+      image.src = imageUrl
+    }
+  } catch {
+    alert('Something went wrong. Please try again later.')
+  }
 }
 
 searchInput.focus()
